@@ -94,9 +94,49 @@ def calculate_roots():
 
     return render_template('calculate_roots.html', result1=root1,result2= root2,Message_result=message)
 
+@app.route('/pallindrome')
+def pallindrome():
+    return render_template('pallindrome.html')
 
+@app.route('/check_pallindrome', methods=['POST'])
+def check_pallindrome():
+    anything=request.form['string']
 
+    if anything == anything[::-1]:
+        message="PALLINDROME"
+    else:
+        message="NOT A PALLINDROME"
+    return render_template('/check_pallindrome.html',result=message)
+    
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n == 2:
+        return True
+    if n % 2 == 0:
+        return False
+    i = 3
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 2
+    return True
 
+@app.route('/prime')
+def prime():
+    return render_template('prime.html')
+
+@app.route('/check_prime', methods=['POST'])
+def check_prime():
+    number_str = request.form['number']
+    number_int = int(number_str)
+
+    if is_prime(number_int):
+        message = "Prime"
+    else:
+        message = "Not Prime"
+
+    return render_template('check_prime.html', result=message)
 
 if __name__ == '__main__':
     app.run(debug=True)
