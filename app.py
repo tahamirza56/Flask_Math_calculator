@@ -138,5 +138,31 @@ def check_prime():
 
     return render_template('check_prime.html', result=message)
 
+
+
+
+@app.route('/pythagoras')
+def pythagoras():
+    return render_template('pythagoras.html')
+
+@app.route('/use_pythagoras', methods=['POST'])
+def use_pythagoras():
+    base_str=request.form['base']
+    base=float(base_str)
+
+    perpendicular_str=request.form['perpendicular']
+    perpendicular=float(perpendicular_str)
+
+    hypotenuse= math.sqrt((base)**2 + (perpendicular)**2)
+
+    return render_template('use_pythagoras.html', result=hypotenuse)
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
